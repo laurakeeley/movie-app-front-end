@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="movies-index">
     <form v-on:submit.prevent="createMovie()">
       <h1>New Movie</h1>
       <ul>
@@ -21,42 +21,30 @@
       <br />
       <input type="submit" value="Create" />
     </form>
-    <h1>All Movies</h1>
-    <div v-for="movie in movies" v-bind:key="movie.id">
-      <p>Title: {{ movie.title }}</p>
-      <p>Plot: {{ movie.plot }}</p>
-      <p>Year: {{ movie.year }}</p>
-    </div>
   </div>
 </template>
 
-<style></style>
-
 <script>
 import axios from "axios";
+
 export default {
   data: function () {
     return {
-      movies: [],
       newMovieParams: {},
+      errors: [],
     };
   },
-  created: function () {
-    this.indexMovies();
-  },
+  created: function () {},
   methods: {
-    indexMovies: function () {
-      axios.get("http://localhost:3000/movies").then((response) => {
-        console.log(response.data);
-        this.movies = response.data;
-      });
-    },
     createMovie: function () {
       axios
-        .post("http://localhost:3000/movies", this.newMovieParams)
+        .post("/movies", this.newMovieParams)
         .then((response) => {
           console.log(response.data);
-          this.movies.push(response.data);
+          this.$router.push("/movies");
+        })
+        .catch((error) => {
+          this.errors = error.response.data.errors;
         });
     },
   },
