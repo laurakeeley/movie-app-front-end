@@ -1,9 +1,10 @@
 <template>
-  <div class="movies-new">
+  <div class="movies-show">
     <h1>Movie Deets</h1>
     <h2>{{ movie.title }}</h2>
     <h3>{{ movie.year }}</h3>
     <p>{{ movie.plot }}</p>
+    <router-link :to="`/movies/${movie.id}/edit`">Edit</router-link>
   </div>
 </template>
 

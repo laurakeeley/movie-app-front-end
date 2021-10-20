@@ -21,11 +21,22 @@
       <br />
       <input type="submit" value="Create" />
     </form>
-    <h1>All Movies</h1>
-    <div v-for="movie in movies" v-bind:key="movie.id">
-      <p>Title: {{ movie.title }}</p>
-      <p>Plot: {{ movie.plot }}</p>
-      <p>Year: {{ movie.year }}</p>
+
+    <div class="row">
+      <div class="col-sm-6" v-for="movie in movies" v-bind:key="movie.id">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">{{ movie.title }}</h5>
+            <p class="card-text">
+              {{ movie.year }} <br />
+              {{ movie.plot }}
+            </p>
+            <router-link :to="`/movies/${movie.id}`" class="btn btn-primary"
+              >Movie Deets</router-link
+            >
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>

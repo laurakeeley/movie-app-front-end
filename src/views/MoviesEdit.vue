@@ -1,6 +1,6 @@
 <template>
   <div class="movies-edit">
-    <form v-on:submit.prevent="updateMovies()">
+    <form v-on:submit.prevent="updateMovie()">
       <h1>Edit Movie</h1>
       <ul>
         <li v-for="error in errors" v-bind:key="error">{{ error }}</li>
@@ -10,12 +10,12 @@
         <input type="text" v-model="editMovieParams.title" />
       </div>
       <div>
-        <label>Plot:</label>
-        <input type="text" v-model="editMovieParams.plot" />
-      </div>
-      <div>
         <label>Year:</label>
         <input type="text" v-model="editMovieParams.year" />
+      </div>
+      <div>
+        <label>Plot:</label>
+        <input type="text" v-model="editMovieParams.plot" />
       </div>
       <input type="submit" value="Update" />
     </form>
@@ -34,13 +34,13 @@ export default {
     };
   },
   created: function () {
-    axios.get(`/movie/${this.$route.params.id}`).then((response) => {
+    axios.get(`/movies/${this.$route.params.id}`).then((response) => {
       console.log(response.data);
       this.editMovieParams = response.data;
     });
   },
   methods: {
-    updateMovies: function () {
+    updateMovie: function () {
       axios
         .patch(`/movies/${this.editMovieParams.id}`, this.editMovieParams)
         .then((response) => {

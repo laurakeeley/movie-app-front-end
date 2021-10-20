@@ -1,9 +1,23 @@
 <template>
-  <div class="movies-new">
+  <div class="movies-index">
     <h1>All Movies</h1>
-    <div v-for="movie in movies" v-bind:key="movie.id">
-      <h2>{{ movie.title }}</h2>
-      <router-link :to="`/movies/${movie.id}`">Movie Deets</router-link>
+    <div class="row">
+      <div class="col-sm-6" v-for="movie in movies" v-bind:key="movie.id">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">{{ movie.title }}</h5>
+            <p class="card-text">
+              {{ movie.year }} <br />
+              {{ movie.plot }}
+            </p>
+            <router-link
+              :to="`/movies/${movie.id}`"
+              class="btn btn-outline-info"
+              >Movie Deets</router-link
+            >
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
